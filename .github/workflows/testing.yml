@@ -26,8 +26,8 @@ jobs:
       - name: "Run integration pytest"
         run: python -m pytest tests/integration/test_diffusion2d.py
       - name: "Run unit pytest"
-        run: python -m pytest tests/unit/test_diffusion2d.py
+        run: python -m pytest tests/unit/test_diffusion2d_functions.py
       - name: "Run unit coverage"
-        run: coverage run -m pytest tests/unit/test_diffusion2d.py
+        run: coverage run -m pytest tests/unit/test_diffusion2d_functions.py
       - name: "Run integration coverage"
         run: coverage run -m pytest tests/integration/test_diffusion2d.py
