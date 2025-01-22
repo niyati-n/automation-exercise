@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.8'
       - name: "Install pytest and coverage"
-        run: pip install pytest coverage
+        run: pip install pytest coverage numpy matplotlib
       - name: "Run integration pytest"
         run: python -m pytest tests/integration/test_diffusion2d.py
       - name: "Run unit pytest"
