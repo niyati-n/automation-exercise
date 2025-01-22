@@ -14,3 +14,20 @@ jobs:
         run: pip install black
       - name: "Run style check"
         run: black --check .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: "Install pytest and coverage"
+        run: pip install pytest coverage
+      - name: "Run integration pytest"
+        run: python -m pytest tests/integration/test_diffusion2d.py
+      - name: "Run unit pytest"
+        run: python -m pytest tests/unit/test_diffusion2d.py
+      - name: "Run unit coverage"
+        run: coverage run -m pytest tests/unit/test_diffusion2d.py
+      - name: "Run integration coverage"
+        run: coverage run -m pytest tests/integration/test_diffusion2d.py
