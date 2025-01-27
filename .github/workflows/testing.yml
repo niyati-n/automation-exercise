@@ -3,7 +3,7 @@ name: Automation exercise workflow
 on: [push]
 
 jobs:
-  style:
+  style_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,3 +31,10 @@ jobs:
         run: coverage run -m pytest tests/unit/test_diffusion2d_functions.py
       - name: "Run integration coverage"
         run: coverage run -m pytest tests/integration/test_diffusion2d.py
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-file
+          path: .coverage
+          include-hidden-files: true
+          retention-days: 1
