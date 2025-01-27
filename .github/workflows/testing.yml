@@ -38,3 +38,25 @@ jobs:
           path: .coverage
           include-hidden-files: true
           retention-days: 1
+  coverage_report:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v2
+      - name: "Install package"
+        run: pip install coverage
+      - name: "Download .coverage for artifact"
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-file
+      - name: "Create coverage report"
+        run: |
+          coverage report
+          coverage xml
+      - name: "Uploading xml coverage report for analysing"
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml-report
+          path: coverage.xml
+          retention-days: 14
